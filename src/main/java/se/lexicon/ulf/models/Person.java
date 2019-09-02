@@ -12,9 +12,12 @@ public class Person {
     public Person(String firstName, String lastName, int age)
     {
         this();
-        ready = this.setFirstName(firstName);
-        this.lastName = lastName;
-        this.age = age;
+        if (this.setFirstName(firstName) && this.setLastName(lastName))
+        {
+            ready = true;
+        }
+
+        this.setAge(age);
     }
 
     private Person() {
@@ -36,15 +39,61 @@ public class Person {
     }
     public boolean setFirstName(String firstName)
     {
-        if (firstName.length() > 1) {
+        firstName = firstName.trim();
+        if (cheakName(firstName)) {
             //Field         //Local variable
             this.firstName = firstName;
             return true;
         }
         return false;
     }
+    public String getLastName()
+    {
+        return lastName;
+    }
+    public boolean setLastName(String lastName)
+    {
+        lastName = lastName.trim();
+        if (cheakName(lastName)) {
+            //Field         //Local variable
+            this.lastName = lastName;
+            return true;
+        }
+        return false;
+    }
+
+    public int getAge()
+    {
+        return age;
+    }
+
+    public void setAge(int age)
+    {
+        if (age >= 0 )
+        {
+            this.age = age;
+
+            if (age >= 18)
+            {
+                adult = true;
+            }
+        }
+    }
+
+    public boolean isAdult()
+    {
+        return adult;
+    }
 
     public boolean isReady() {
         return ready;
+    }
+
+    private boolean cheakName(String name)
+    {
+        if (name.length() > 1) {
+            return true;
+        }
+        return false;
     }
 }

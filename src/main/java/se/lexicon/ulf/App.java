@@ -12,8 +12,8 @@ public class App
     {
 
 
-        Person anyone = new Person("Ulf", "Bengtsson", 37);
-        Person anotherOne = new Person("Erik","Svensson",42);
+        Person anyone = new Person("  Ulf ", "Bengtsson", 37);
+        Person anotherOne = new Person("   Erik   ","Svensson",42);
 
         Person[] peopleList = {anotherOne, anyone};
 
@@ -23,6 +23,7 @@ public class App
         {
             if (one.isReady()) {
                 one.gretting();
+                System.out.println("adult: " + one.isAdult());
             }
             else {
                 System.out.println("Name not valid!");
