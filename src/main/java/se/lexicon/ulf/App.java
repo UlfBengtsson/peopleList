@@ -26,6 +26,9 @@ public class App
         Person selectedPerson = null;
 
         while (keepLooping) {
+
+            System.out.println("----- People Menu -----\n1: Add person\n2: Print list\n3: Pick a person\n4: Greetings from person\n9: Quit");
+
             int selection = askUserForNumber("Select");
 
             switch (selection) {
@@ -43,6 +46,13 @@ public class App
                 case 3:
                     selectedPerson = selectPerson(peopleList, listCounter);
                     break;
+                case 4:
+                    if (selectedPerson != null) {
+                        selectedPerson.gretting();
+                    } else {
+                        System.out.println("No person is selected!");
+                    }
+                    break;
                 case 9:
                     keepLooping = false;
                     System.out.println("Bye bye!");
@@ -56,8 +66,27 @@ public class App
     }
 
     private static Person selectPerson(Person[] people, int counter) {
-        printListOfPeople(people,counter);
-        int indexOfPerson = askUserForNumber("Number") - 1;
+        if (counter == 0)
+        {
+            System.out.println("No person to pick");
+            return null;
+        }
+        boolean notAValidNumber = true;
+        int indexOfPerson = -1;
+
+        while (notAValidNumber) {
+            printListOfPeople(people, counter);
+            indexOfPerson = askUserForNumber("Number") - 1;
+
+            if (indexOfPerson < counter && indexOfPerson >= 0)
+            {
+                notAValidNumber = false;
+            }
+            else
+            {
+                System.out.println("not a valid selection!");
+            }
+        }
         return people[indexOfPerson];
     }
 
