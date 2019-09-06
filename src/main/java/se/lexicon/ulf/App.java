@@ -53,6 +53,13 @@ public class App
                         System.out.println("No person is selected!");
                     }
                     break;
+                case 5:
+                    if (selectedPerson != null) {
+                        editPerson(selectedPerson);
+                    } else {
+                        System.out.println("No person is selected!");
+                    }
+                    break;
                 case 9:
                     keepLooping = false;
                     System.out.println("Bye bye!");
@@ -62,6 +69,36 @@ public class App
                     break;
             }
 
+        }
+    }
+
+    private static void editPerson(Person person) {
+        boolean looping = true;
+
+        while (looping)
+        {
+            person.detailInfo();
+            System.out.println("---- Edit person ----\n1: Change First name\n2: Change Last name\n3: Change Age\n9: Go back to main menu");
+            int selection = askUserForNumber("Selection");
+
+            switch (selection)
+            {
+                case 1:
+                    person.setFirstName(askUserFor("First name"));
+                    break;
+                case 2:
+                    person.setLastName(askUserFor("Last name"));
+                    break;
+                case 3:
+                    person.setAge(askUserForNumber("Age"));
+                    break;
+                case 9:// if
+                    looping = false;
+                    break;
+                default:// else
+                    System.out.println("Incorrect selection!");
+                    break;
+            }
         }
     }
 

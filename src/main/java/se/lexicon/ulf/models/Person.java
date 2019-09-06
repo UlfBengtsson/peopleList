@@ -12,12 +12,10 @@ public class Person {
     public Person(String firstName, String lastName, int age)
     {
         this();
-        if (this.setFirstName(firstName) && this.setLastName(lastName))
-        {
-            ready = true;
-        }
-
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
         this.setAge(age);
+        checkDataOfPerson();
     }
 
     private Person() {
@@ -32,34 +30,42 @@ public class Person {
                             " and im " + age + " years old");
     }
 
+    public void detailInfo()
+    {
+        System.out.println("-- Detail Information --\nFirst name: " + (firstName != null ? firstName : "") +
+                "\nLast name: " + (lastName != null ? lastName : "") +
+                "\nAge: " + age +
+                "\nAdult: " + (adult ? "Yes" : "No") +
+                "\nReady: " + (ready ? "Complete" : "Incomplete"));
+    }
+
     //Getters and Setters
     public String getFirstName()
     {
         return firstName;
     }
-    public boolean setFirstName(String firstName)
+    public void setFirstName(String firstName)
     {
         firstName = firstName.trim();
         if (cheakName(firstName)) {
             //Field         //Local variable
             this.firstName = firstName;
-            return true;
+            checkDataOfPerson();
         }
-        return false;
+
     }
     public String getLastName()
     {
         return lastName;
     }
-    public boolean setLastName(String lastName)
+    public void setLastName(String lastName)
     {
         lastName = lastName.trim();
         if (cheakName(lastName)) {
             //Field         //Local variable
             this.lastName = lastName;
-            return true;
+            checkDataOfPerson();
         }
-        return false;
     }
 
     public int getAge()
@@ -77,6 +83,10 @@ public class Person {
             {
                 adult = true;
             }
+            else
+            {
+                adult = false;
+            }
         }
     }
 
@@ -91,15 +101,33 @@ public class Person {
 
     private boolean cheakName(String name)
     {
-        if (name.length() > 1) {
-            return true;
+        if (name != null)
+        {
+            if (name.length() > 1) {
+                return true;
+            }
         }
         return false;
+    }
+
+    private void checkDataOfPerson()
+    {
+        if(!cheakName(firstName))
+        {
+            ready = false;
+            return;
+        }
+        if (!cheakName(lastName))
+        {
+            ready = false;
+            return;
+        }
+        ready = true;
     }
 
     @Override
     public String toString()
     {
-        return firstName + " " + lastName;
+        return (firstName != null ? firstName : " ") + " " + (lastName != null ? lastName : "");
     }
 }
